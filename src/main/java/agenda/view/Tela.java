@@ -10,6 +10,9 @@ package agenda.view;
  */
 import agenda.model.Contato;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Panel;
 import java.util.*;
 import javax.swing.*;
 
@@ -67,43 +70,68 @@ public class Tela extends JFrame {
     }
 
     public void criaTela() {
-        this.setSize(400, 300);
+        this.setSize(500, 200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Agenda de Contatos");
-        
+
         this.telaPrincipal = new JPanel();
-        this.telaPrincipal.setLayout(new BorderLayout());    
+        this.telaPrincipal.setLayout(new BorderLayout());
+        this.add(this.telaPrincipal);
     }
-    
+
+    private void listaContatos() {
+        JPanel jPContatos = new JPanel();
+        jPContatos.setBorder(BorderFactory.createTitledBorder("Contatos"));
+        jPContatos.setLayout(new BorderLayout());
+        jPContatos.setPreferredSize(new Dimension(95, 200));
+        jPContatos.add(new JLabel("Nome: "), BorderLayout.WEST);
+
+        this.telaPrincipal.add(jPContatos, BorderLayout.WEST);
+
+    }
+
     private void configurarFormulario() {
         JPanel jPformulario = new JPanel();
         jPformulario.setBorder(BorderFactory.createTitledBorder("Formulário"));
-        
-        jPformulario.add(new JLabel("Nome: "));
-        this.jtNome = new JTextField(15);
-        jPformulario.add(this.jtNome);
-        
-        jPformulario.add(new JLabel("Telefone: "));
-        this.jtTelefone = new JTextField(15);
-        jPformulario.add(this.jtTelefone);
-        
-        jPformulario.add(new JLabel("E-mail: "));
-        this.jtEmail = new JTextField(15);
-        jPformulario.add(this.jtEmail);
-        
-        this.add(jPformulario, BorderLayout.EAST);
+        jPformulario.setLayout(new BorderLayout());
+
+        JPanel descricao = new JPanel();
+        JPanel caixaTexto = new JPanel();
+        descricao.setLayout(new GridLayout(0, 1));
+        caixaTexto.setLayout(new GridLayout(0, 1));
+
+        this.jtNome = new JTextField(20);
+        descricao.add(new JLabel("Nome: "));
+        caixaTexto.add(this.jtNome);
+
+        this.jtTelefone = new JTextField(20);
+        descricao.add(new JLabel("Telefone: "));
+        caixaTexto.add(this.jtTelefone);
+
+        this.jtEmail = new JTextField(20);
+        descricao.add(new JLabel("E-mail: "));
+        caixaTexto.add(this.jtEmail);
+
+        jPformulario.add(descricao, BorderLayout.WEST);
+        jPformulario.add(caixaTexto, BorderLayout.EAST);
+
+        this.telaPrincipal.add(jPformulario);
     }
-    
+
     public void exibirTelas() {
+        criaTela();
+        configurarFormulario();
+        listaContatos();
+       
         this.add(telaPrincipal);
         this.setVisible(true);
+        
+        repaint();
     }
-    
+
     public static void main(String[] args) {
         Tela tela = new Tela();
-        
-        tela.criaTela();
-        tela.configurarFormulario();
+
         tela.exibirTelas();
     }
 }
