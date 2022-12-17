@@ -75,6 +75,25 @@ public class Tela extends JFrame {
         this.telaPrincipal.setLayout(new BorderLayout());    
     }
     
+    private void configurarFormulario() {
+        JPanel jPformulario = new JPanel();
+        jPformulario.setBorder(BorderFactory.createTitledBorder("Formulário"));
+        
+        jPformulario.add(new JLabel("Nome: "));
+        this.jtNome = new JTextField(15);
+        jPformulario.add(this.jtNome);
+        
+        jPformulario.add(new JLabel("Telefone: "));
+        this.jtTelefone = new JTextField(15);
+        jPformulario.add(this.jtTelefone);
+        
+        jPformulario.add(new JLabel("E-mail: "));
+        this.jtEmail = new JTextField(15);
+        jPformulario.add(this.jtEmail);
+        
+        this.add(jPformulario, BorderLayout.EAST);
+    }
+    
     public void exibirTelas() {
         this.add(telaPrincipal);
         this.setVisible(true);
@@ -84,6 +103,7 @@ public class Tela extends JFrame {
         Tela tela = new Tela();
         
         tela.criaTela();
+        tela.configurarFormulario();
         tela.exibirTelas();
     }
 }
