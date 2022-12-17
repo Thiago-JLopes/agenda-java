@@ -13,12 +13,13 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Panel;
+import java.awt.ScrollPane;
 import java.util.*;
 import javax.swing.*;
 
 public class Tela extends JFrame {
 
-    private List<Contato> contatos;
+    private JList<Contato> contatos;
     private JPanel telaPrincipal;
     private JTextField jtNome;
     private JTextField jtTelefone;
@@ -30,11 +31,11 @@ public class Tela extends JFrame {
         this.idUltimo = 0;
     }
 
-    public List<Contato> getContatos() {
+    public JList<Contato> getContatos() {
         return contatos;
     }
 
-    public void setContatos(List<Contato> contatos) {
+    public void setContatos(JList<Contato> contatos) {
         this.contatos = contatos;
     }
 
@@ -71,7 +72,7 @@ public class Tela extends JFrame {
     }
 
     public void criaTela() {
-        this.setSize(500, 200);
+        this.setSize(300, 200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Agenda de Contatos");
 
@@ -84,7 +85,15 @@ public class Tela extends JFrame {
         JPanel jPContatos = new JPanel();
         jPContatos.setBorder(BorderFactory.createTitledBorder("Contatos"));
         jPContatos.setLayout(new BorderLayout());
-        jPContatos.setPreferredSize(new Dimension(95, 200));
+        jPContatos.setPreferredSize(new Dimension(120, 200));
+        
+        DefaultListModel<Contato> listaContatos = new DefaultListModel<>();
+        contatos = new JList<>(listaContatos);
+        contatos.setVisible(true);
+        contatos.setPreferredSize(new Dimension(95,300));
+        contatos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        jPContatos.add(new JScrollPane(contatos), BorderLayout.EAST);
         
 
         this.telaPrincipal.add(jPContatos, BorderLayout.WEST);
@@ -151,5 +160,6 @@ public class Tela extends JFrame {
         Tela tela = new Tela();
 
         tela.exibirTelas();
+        tela.pack();
     }
 }
