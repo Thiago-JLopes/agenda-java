@@ -11,12 +11,22 @@ package agenda.model;
 public class Contato {
     private String nome;
     private String telefone;
+    private String descricao;
     private String email;
 
-    public Contato(String nome, String telefone, String email) {
+    public Contato(String nome, String telefone, String descricao, String email) {
         this.nome = nome;
         this.telefone = telefone;
+        this.descricao = descricao;
         this.email = email;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getNome() {

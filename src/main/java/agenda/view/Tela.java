@@ -22,6 +22,7 @@ public class Tela extends JFrame {
     private JPanel telaPrincipal;
     private JTextField jtNome;
     private JTextField jtTelefone;
+    private JTextField jtDescricao;
     private JTextField jtEmail;
     private int idUltimo;
 
@@ -84,7 +85,7 @@ public class Tela extends JFrame {
         jPContatos.setBorder(BorderFactory.createTitledBorder("Contatos"));
         jPContatos.setLayout(new BorderLayout());
         jPContatos.setPreferredSize(new Dimension(95, 200));
-        jPContatos.add(new JLabel("Nome: "), BorderLayout.WEST);
+        
 
         this.telaPrincipal.add(jPContatos, BorderLayout.WEST);
 
@@ -114,6 +115,23 @@ public class Tela extends JFrame {
 
         jPformulario.add(descricao, BorderLayout.WEST);
         jPformulario.add(caixaTexto, BorderLayout.EAST);
+        
+        //Adicona botoes
+        JPanel jpButton = new JPanel();
+        
+        JButton btAdicionar = new JButton("Adicionar");
+        jpButton.add(btAdicionar);
+        
+        JButton btLimpar = new JButton("Limpar");
+        jpButton.add(btLimpar);
+        
+        JButton btEditar = new JButton("Editar");
+        jpButton.add(btEditar);
+        
+        JButton btRemover = new JButton("Remover");
+        jpButton.add(btRemover);
+        
+        jPformulario.add(jpButton, BorderLayout.SOUTH);
 
         this.telaPrincipal.add(jPformulario);
     }
