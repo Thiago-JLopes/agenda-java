@@ -8,6 +8,8 @@ package agenda.view;
  *
  * @author thiago
  */
+import agenda.control.AdicionarContato;
+import agenda.control.ConfiguraLista;
 import agenda.model.Contato;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -29,6 +31,14 @@ public class Tela extends JFrame {
 
     public Tela() {
         this.idUltimo = 0;
+    }
+
+    public JTextField getJtDescricao() {
+        return jtDescricao;
+    }
+
+    public void setJtDescricao(JTextField jtDescricao) {
+        this.jtDescricao = jtDescricao;
     }
 
     public JList<Contato> getContatos() {
@@ -78,7 +88,8 @@ public class Tela extends JFrame {
 
         this.telaPrincipal = new JPanel();
         this.telaPrincipal.setLayout(new BorderLayout());
-        this.add(this.telaPrincipal);
+        
+        exibirTelas();
     }
 
     private void listaContatos() {
@@ -88,10 +99,14 @@ public class Tela extends JFrame {
         jPContatos.setPreferredSize(new Dimension(120, 200));
         
         DefaultListModel<Contato> listaContatos = new DefaultListModel<>();
+        //teste
+        listaContatos.addElement(new Contato("Thiago", "(32)99949-6371", "UFJF", "tiagojosexnn12@gmail.com"));
         contatos = new JList<>(listaContatos);
         contatos.setVisible(true);
         contatos.setPreferredSize(new Dimension(95,300));
         contatos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        contatos.addListSelectionListener(new ConfiguraLista(this));
         
         jPContatos.add(new JScrollPane(contatos), BorderLayout.EAST);
         
@@ -111,15 +126,19 @@ public class Tela extends JFrame {
         caixaTexto.setLayout(new GridLayout(0, 1));
 
         this.jtNome = new JTextField(20);
-        descricao.add(new JLabel("Nome: "));
+        descricao.add(new JLabel("Nome:"));
         caixaTexto.add(this.jtNome);
 
         this.jtTelefone = new JTextField(20);
-        descricao.add(new JLabel("Telefone: "));
+        descricao.add(new JLabel("Telefone:"));
         caixaTexto.add(this.jtTelefone);
+        
+        this.jtDescricao = new JTextField(20);
+        descricao.add(new JLabel("Descrição:"));
+        caixaTexto.add(this.jtDescricao);
 
         this.jtEmail = new JTextField(20);
-        descricao.add(new JLabel("E-mail: "));
+        descricao.add(new JLabel("E-mail:"));
         caixaTexto.add(this.jtEmail);
 
         jPformulario.add(descricao, BorderLayout.WEST);
@@ -129,6 +148,7 @@ public class Tela extends JFrame {
         JPanel jpButton = new JPanel();
         
         JButton btAdicionar = new JButton("Adicionar");
+        btAdicionar.addActionListener(new AdicionarContato(this));
         jpButton.add(btAdicionar);
         
         JButton btLimpar = new JButton("Limpar");
@@ -146,20 +166,19 @@ public class Tela extends JFrame {
     }
 
     public void exibirTelas() {
-        criaTela();
-        configurarFormulario();
-        listaContatos();
-       
-        this.add(telaPrincipal);
         this.setVisible(true);
-        
-        repaint();
+            
+        listaContatos();
+        configurarFormulario();
+       
+        this.add(this.telaPrincipal);
+        this.repaint();
     }
 
     public static void main(String[] args) {
         Tela tela = new Tela();
 
-        tela.exibirTelas();
+        tela.criaTela();
         tela.pack();
     }
 }
