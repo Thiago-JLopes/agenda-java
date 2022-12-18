@@ -23,7 +23,7 @@ public class ConfiguraLista implements ListSelectionListener{
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        int id = tela.getContatos().getLeadSelectionIndex();
+        int id = tela.getContatos().getSelectedIndex();
         
         if(id != -1) {
             Contato contatos = tela.getContatos().getModel().getElementAt(id);

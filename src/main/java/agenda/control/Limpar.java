@@ -21,6 +21,7 @@ public class Limpar implements ActionListener{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        
         tela.getJtNome().setText("");
         tela.getJtTelefone().setText("");
         tela.getJtDescricao().setText("");

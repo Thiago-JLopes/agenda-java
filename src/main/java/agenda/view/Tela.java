@@ -10,7 +10,9 @@ package agenda.view;
  */
 import agenda.control.AdicionarContato;
 import agenda.control.ConfiguraLista;
+import agenda.control.Editar;
 import agenda.control.Limpar;
+import agenda.control.Remover;
 import agenda.model.Contato;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -157,9 +159,11 @@ public class Tela extends JFrame {
         jpButton.add(btLimpar);
         
         JButton btEditar = new JButton("Editar");
+        btEditar.addActionListener(new Editar(this));
         jpButton.add(btEditar);
         
         JButton btRemover = new JButton("Remover");
+        btRemover.addActionListener(new Remover(this));
         jpButton.add(btRemover);
         
         jPformulario.add(jpButton, BorderLayout.SOUTH);
